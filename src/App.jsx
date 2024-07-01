@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import Banner from "./ui/Banner";
-import Products from "./ui/Products";
+import Banner from "./components/Banner";
+import Products from "./components/Products";
 
 function App() {
   const [products, setProducts] = useState([]);

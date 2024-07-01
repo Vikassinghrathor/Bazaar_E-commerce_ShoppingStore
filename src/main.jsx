@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
-import Header from "./ui/Header.jsx";
+import Header from "./components/Header.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import Footer from "./ui/Footer.jsx";
-import { getProducts } from "./data/index.jsx";
-import { app } from "./fireabase.config.js";
+import Footer from "./components/Footer.jsx";
+import { getProducts } from "./api/Api.jsx";
+import { app } from "./firebase.config.js";
 import { store, persistor } from "./redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";

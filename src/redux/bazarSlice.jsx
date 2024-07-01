@@ -60,7 +60,7 @@ export const {
   addToCart,
   deleteItem,
   resetCart,
-  increamentQuantity,
+  incrementQuantity,
   decrementQuantity,
   addUser,
   removeUser,
