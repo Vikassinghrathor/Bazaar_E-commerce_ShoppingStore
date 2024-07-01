@@ -1,34 +1,23 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MdOutlineStar } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  decrementQuantity,
-  incrementQuantity,
-} from "../redux/bazarSlice";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/bazarSlice";
 import { ToastContainer, toast } from "react-toastify";
 
 const Product = () => {
   const dispatch = useDispatch();
-  const [details, setDetails] = useState({});
-  const productData = useSelector((state) => state.bazar.productData);
-
+  const [details, Details] = useState({});
+  let [baseQty, setBaseQty] = useState(1);
   const location = useLocation();
   useEffect(() => {
-    productData?.length > 0
-      ? productData.find((item) =>
-          item?.id === location.state.item._id
-            ? setDetails(item)
-            : setDetails(location.state.item)
-        )
-      : setDetails(location.state.item);
-  }, [location, productData]);
+    Details(location.state.item);
+  }, [location]);
+
   return (
     <div>
-      <div className="max-w-screen-xl mx-auto my-10 flex flex-col md:flex-row gap-10 px-4">
-        <div className="w-full lg:w-2/5 relative">
+      <div className="max-w-screen-xl mx-auto my-10 flex gap-10">
+        <div className="w-2/5 relative">
           <img
             className="w-full h-[550px] object-cover"
             src={details.image}
@@ -42,7 +31,7 @@ const Product = () => {
             )}
           </div>
         </div>
-        <div className="w-full lg:w-3/5 flex flex-col justify-center gap-12">
+        <div className="w-3/5 flex flex-col justify-center gap-12">
           <div>
             <h2 className="text-4xl font-semibold">{details.title}</h2>
             <div className="flex items-center gap-4 mt-3">
@@ -71,35 +60,15 @@ const Product = () => {
               <div className="flex items-center gap-4 text-sm font-semibold">
                 <button
                   onClick={() =>
-                    dispatch(
-                      decrementQuantity({
-                        _id: details._id,
-                        title: details.title,
-                        image: details.image,
-                        price: details.price,
-                        quantity: 1,
-                        description: details.description,
-                      })
-                    )
+                    setBaseQty(baseQty === 1 ? (baseQty = 1) : baseQty - 1)
                   }
                   className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
                 >
                   -
                 </button>
-                {details.quantity || 1}
+                {baseQty}
                 <button
-                  onClick={() =>
-                    dispatch(
-                      incrementQuantity({
-                        _id: details._id,
-                        title: details.title,
-                        image: details.image,
-                        price: details.price,
-                        quantity: 1,
-                        description: details.description,
-                      })
-                    )
-                  }
+                  onClick={() => setBaseQty(baseQty + 1)}
                   className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
                 >
                   +
@@ -114,7 +83,7 @@ const Product = () => {
                     title: details.title,
                     image: details.image,
                     price: details.price,
-                    quantity: 1,
+                    quantity: baseQty,
                     description: details.description,
                   })
                 ) & toast.success(`${details.title} is added`)
