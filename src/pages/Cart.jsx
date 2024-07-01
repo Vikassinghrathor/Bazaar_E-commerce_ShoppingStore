@@ -74,7 +74,7 @@ const Cart = () => {
             {payNow && (
               <div className="w-full mt-6 flex items-center justify-center">
                 <StripeCheckout
-                  stripeKey="pk_test_51PXiwPAHaA4U8TZkOZvzEcNtGte8yLglLDQsqYdYbBifX0Wcp7iLH5WIAQXgmA8BjnuIbimYZoqRci5YGCpSH6Ow00RN96RXDc"
+                  stripeKey={import.meta.env.VITE_STRIPE_KEY}
                   name="Bazar Online Shopping"
                   amount={totalAmt * 100}
                   label="Pay to bazar"
