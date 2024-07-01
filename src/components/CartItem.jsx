@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   decrementQuantity,
   deleteItem,
-  increamentQuantity,
+  incrementQuantity,
   resetCart,
 } from "../redux/bazarSlice";
 import { ToastContainer, toast } from "react-toastify";
@@ -65,7 +65,7 @@ const CartItem = () => {
                       <span
                         onClick={() =>
                           dispatch(
-                            increamentQuantity({
+                            incrementQuantity({
                               _id: item._id,
                               title: item.title,
                               image: item.image,
