@@ -1,50 +1,20 @@
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Home from "./pages/Home";
-import Cart from "./pages/Cart";
-import ReactDOM from "react-dom/client";
-import {
-  Outlet,
-  createBrowserRouter,
-  RouterProvider,
-  ScrollRestoration,
-} from "react-router-dom";
-import { productsData } from "./api/Api";
+import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
+import Banner from "./ui/Banner";
+import Products from "./ui/Products";
 
-const Layout = () => {
-  return(
-    <div>
-      <Header/>
-      <Outlet/>
-      <Footer/>
-    </div>
-  );
-};
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout/>,
-    children: [
-      {
-        path: "/",
-        element: <Home/>,
-        loader: productsData,
-      },
-      {
-        path: "/cart",
-        element: <Cart/>,
-      },
-    ],
-  },
-]);
 function App() {
+  const [products, setProducts] = useState([]);
+  const data = useLoaderData();
+  useEffect(() => {
+    setProducts(data.data);
+  }, [data]);
+
   return (
-    <div className="font-bodyFont">
-     <Header/>
-     <Home/>
-     <Footer/>
-    </div>
+    <main>
+      <Banner />
+      <Products products={products} />
+    </main>
   );
 }
 

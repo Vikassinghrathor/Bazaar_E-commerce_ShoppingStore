@@ -8,15 +8,14 @@ const Products = ({products}) => {
           shopping everyday
         </h1>
         <span className="w-20 h-[3px] bg-black"></span>
-        <p className="max-w-[700px] text-gray-600 text-center">
-          {" "}
+        <p className="max-w-[700px] text-gray-600 text-center px-4">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo,
           quos fugit inventore, cumque quae corporis ratione tenetur eos
           voluptates neque magnam soluta aperiam omnis perspiciatis reiciendis
           asperiores repudiandae assumenda quidem.
         </p>
       </div>
-      <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10">
+      <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 py-10 px-4">
         {
           products.map((item) => (
             <ProductsCard key={item._id} product={item} />
